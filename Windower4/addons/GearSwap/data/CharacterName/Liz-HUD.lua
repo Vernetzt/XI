@@ -9,6 +9,7 @@ keybinds_off['key_bind_subweapon'] = ''
 
 -- NEW
 keybinds_off['key_bind_dualwield'] = ''
+keybinds_off['key_bind_bow'] = ''
 
 keybinds_off['key_bind_element_cycle'] = ''
 keybinds_off['key_bind_sc_level'] = ''
@@ -78,6 +79,7 @@ hud_regenMode = ''
 
 -- NEW
 hud_dualwield = ''
+hud_bow = ''
 
 hud_Enspell = ''
 hud_handleSkillchains = ''
@@ -105,6 +107,12 @@ function construct_HUD_Categories( useLightMode )
 			hud_dualwield = [[        ${keybinds_color}${key_bind_dualwield}${options_color}Dual Wield:\cr ${selection_color}${player_current_dualwield|Unset}]]
 		else
 			hud_dualwield = ''
+		end
+
+		if bow ~= nil then
+			hud_bow = [[        ${keybinds_color}${key_bind_bow}${options_color}Bow:\cr ${selection_color}${player_current_bow|Unset}]]
+		else
+			hud_bow = ''
 		end
 		
 		if nukeModes ~= nil then
@@ -179,6 +187,14 @@ function construct_HUD_Categories( useLightMode )
 			hud_dualwield = ''
 		end
 
+		if bow ~= nil then
+			hud_bow = [[\cr 
+			        ${keybinds_color}${key_bind_bow}${options_color}Bow:\cr ${selection_color}${player_current_bow|Unset}]]
+		else
+			hud_bow = ''
+		end
+
+
 		hud_nukingMode = [[\cr 
 		        ${keybinds_color}${key_bind_casting}${options_color}Nuking:\cr ${selection_color}${player_current_casting|Unset}]]
 		if mainWeapon ~= nil then
@@ -251,7 +267,7 @@ function buildHUD( useLightMode )
 	if useLightMode then
 		hud_mode = [[        ${sections_color}Modes:]]..hud_idleMode..hud_meleeMode..hud_dualwield..hud_nukingMode..hud_endofline
 	else
-		hud_mode = [[${sections_color}Modes:]]..hud_idleMode..hud_meleeMode..hud_dualwield..hud_nukingMode..hud_endofline
+		hud_mode = [[${sections_color}Modes:]]..hud_idleMode..hud_meleeMode..hud_dualwield..hud_bow..hud_nukingMode..hud_endofline
 	end
 	hud_options = [[${sections_color}Options:]]..hud_handleSkillchains..hud_lockWeapons..hud_lockMovespeed..hud_endofline
 	hud_job = [[${sections_color}${player_job}:]]..hud_geoCycle..hud_indiCycle..hud_entrustCycle..hud_mainWeapon..hud_subWeapon..hud_regenMode..hud_nukingElement..hud_makingSC..hud_Enspell..hud_endofline        
@@ -294,10 +310,15 @@ function validateTextInformation()
     if meleeModes ~= nil then
     	main_text_hud.player_current_melee = meleeModes.current
 		end
+
 		-- NEW
 		if dualwield ~= nil then
     	main_text_hud.player_current_dualwield = dualwield.current
-    end
+		end
+		if bow ~= nil then
+			main_text_hud.player_current_bow = bow.current
+		end
+
     if mainWeapon ~= nil then
     	main_text_hud.player_current_mainweapon = mainWeapon.current
     end

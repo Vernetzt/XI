@@ -236,8 +236,7 @@ function get_sets()
 	-- Fill this with your own JSE. 
     --Atrophy
     AF.Head		=	"Atro.Chapeau +1"
-    AF.Body		=	"Atrophy Tabard +1"
-    -- AF.Hands	=	"Atrophy Gloves +3"
+    AF.Body		=	"Atrophy Tabard +2"
     AF.Hands	=	"Atrophy Gloves +1"
     AF.Legs		=	"Atrophy Tights +1"
     AF.Feet		=	"Atrophy Boots +1"
@@ -245,10 +244,11 @@ function get_sets()
     --Vitiation
     RELIC.Head		=	"Viti. Chapeau +1"
     -- RELIC.Head		=	"Viti. Chapeau +3"
-    -- RELIC.Body		=	"Viti. Tabard +3"
     RELIC.Body		=	"Viti. Tabard +1"
+    -- RELIC.Body		=	"Viti. Tabard +3"
     RELIC.Hands 	=	"Viti. Gloves +1"
-    RELIC.Legs		=	"Viti. Tights +3"
+    RELIC.Legs		=	"Viti. Tights +1"
+    -- RELIC.Legs		=	"Viti. Tights +3"
     RELIC.Feet		=	"Vitiation Boots +1"
     -- RELIC.Feet		=	"Vitiation Boots +3"
 
@@ -342,7 +342,7 @@ function get_sets()
             body="Malignance Tabard",
             hands="Malignance Gloves",
             legs="Malignance Tights",
-            feet={ name="Taeon Boots", augments={'Attack+24','"Dual Wield"+3','STR+6 AGI+6',}},         --9
+            feet={ name="Taeon Boots", augments={'Accuracy+25','"Dual Wield"+4'}},         --9
             neck="Anu Torque",
             waist="Windbuffet Belt +1",
             -- waist="Reiki Yotai",                                                                     --7
@@ -637,7 +637,7 @@ function get_sets()
 
     -- Special -Recast sets
     sets.me["Utsusemi: Ichi"] = {
-        main="Crocea Mors",
+        -- main="Crocea Mors",
         ammo="Impatiens",
         head="Atro. Chapeau +1",
         body={ name="Viti. Tabard +1", augments={'Enhances "Chainspell" effect',}},
@@ -653,7 +653,7 @@ function get_sets()
         back="Solemnity Cape",
     }
     sets.me["Utsusemi: Ni"] = {
-        main="Crocea Mors",
+        -- main="Crocea Mors",
         ammo="Impatiens",
         head="Atro. Chapeau +1",
         body={ name="Viti. Tabard +1", augments={'Enhances "Chainspell" effect',}},
@@ -817,7 +817,7 @@ function get_sets()
         ammo="Pemphredo Tathlum",
         head="Cath Palug Crown",
         body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-        hands="Jhakri Cuffs +2",
+        hands="Kaykaus cuffs +1",
         legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','INT+1','Mag. Acc.+9','"Mag.Atk.Bns."+11',}},
         feet="Jhakri Pigaches +2",
         neck="Dls. Torque +1",
@@ -828,6 +828,25 @@ function get_sets()
         right_ring="Stikini Ring",
         back=RDMCape.MACC,
     }
+
+    sets.midcast.Enfeebling.macc.bow = {
+        main="Crocea Mors",
+        sub="Ammurapi Shield",
+        ranged="Kaja Bow",
+        head="Cath Palug Crown",
+        body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
+        hands="Kaykaus cuffs +1",
+        legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','INT+1','Mag. Acc.+9','"Mag.Atk.Bns."+11',}},
+        feet="Jhakri Pigaches +2",
+        neck="Dls. Torque +1",
+        waist="Eschan Stone",
+        left_ear="Hermetic Earring",
+        right_ear="Malignance Earring",
+        left_ring="Stikini Ring",
+        right_ring="Stikini Ring",
+        back=RDMCape.MACC,
+    }
+
 	sets.midcast["Stun"] = set_combine(sets.midcast.Enfeebling.macc, {
 
 	})
@@ -838,7 +857,7 @@ function get_sets()
         ammo="Pemphredo Tathlum",
         head="Cath Palug Crown",
         body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-        hands="Jhakri Cuffs +2",
+        hands="Kaykaus cuffs +1",
         legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','INT+1','Mag. Acc.+9','"Mag.Atk.Bns."+11',}},
         feet="Jhakri Pigaches +2",
         neck="Dls. Torque +1",
@@ -856,7 +875,7 @@ function get_sets()
         ammo="Pemphredo Tathlum",
         head="Cath Palug Crown",
         body={ name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}},
-        hands="Jhakri Cuffs +2",
+        hands="Kaykaus cuffs +1",
         legs={ name="Chironic Hose", augments={'Mag. Acc.+18 "Mag.Atk.Bns."+18','INT+1','Mag. Acc.+9','"Mag.Atk.Bns."+11',}},
         feet="Jhakri Pigaches +2",
         neck="Dls. Torque +1",
@@ -871,7 +890,7 @@ function get_sets()
     sets.midcast.Enfeebling.skillpot = {
         main="Crocea Mors",
         sub="Ammurapi Shield",
-        ammo="Impatiens",
+        ammo="Pemphredo Tathlum",
         head="Befouled Crown",
         body={ name="Viti. Tabard +1", augments={'Enhances "Chainspell" effect',}},
         hands={ name="Viti. Gloves +1", augments={'Enhancing Magic duration',}},
@@ -882,14 +901,14 @@ function get_sets()
         left_ear="Andoaa Earring",
         right_ear="Malignance Earring",
         left_ring="Stikini Ring",
-        right_ring="Rahab Ring",
+        right_ring="Stikini Ring",
         back={ name="Ghostfyre Cape", augments={'Enfb.mag. skill +6','Enha.mag. skill +9','Mag. Acc.+7','Enh. Mag. eff. dur. +19',}},
     }
 	-- Tpe E-potency from: Enfeeb skill, Mnd, & "Enfeeb Potency" gear
     sets.midcast.Enfeebling.skillmndpot = {
         main="Crocea Mors",
         sub="Ammurapi Shield",
-        ammo="Impatiens",
+        ammo="Pemphredo Tathlum",
         head="Befouled Crown",
         body={ name="Viti. Tabard +1", augments={'Enhances "Chainspell" effect',}},
         hands={ name="Viti. Gloves +1", augments={'Enhancing Magic duration',}},
@@ -900,14 +919,14 @@ function get_sets()
         left_ear="Andoaa Earring",
         right_ear="Malignance Earring",
         left_ring="Stikini Ring",
-        right_ring="Rahab Ring",
+        right_ring="Stikini Ring",
         back={ name="Ghostfyre Cape", augments={'Enfb.mag. skill +6','Enha.mag. skill +9','Mag. Acc.+7','Enh. Mag. eff. dur. +19',}},
     }
 	-- Type F-potency from "Enfeebling potency" gear only
     sets.midcast.Enfeebling.potency = {
         main="Crocea Mors",
         sub="Ammurapi Shield",
-        ammo="Impatiens",
+        ammo="Pemphredo Tathlum",
         head="Befouled Crown",
         body={ name="Viti. Tabard +1", augments={'Enhances "Chainspell" effect',}},
         hands={ name="Viti. Gloves +1", augments={'Enhancing Magic duration',}},
@@ -918,7 +937,7 @@ function get_sets()
         left_ear="Andoaa Earring",
         right_ear="Malignance Earring",
         left_ring="Stikini Ring",
-        right_ring="Rahab Ring",
+        right_ring="Stikini Ring",
         back={ name="Ghostfyre Cape", augments={'Enfb.mag. skill +6','Enha.mag. skill +9','Mag. Acc.+7','Enh. Mag. eff. dur. +19',}},
     }
 
@@ -1012,7 +1031,7 @@ function get_sets()
         ammo="Pemphredo Tathlum",
         head={ name="Vanya Hood", augments={'MP+50','"Cure" potency +7%','Enmity-6',}},
         body={ name="Kaykaus Bliaut", augments={'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
-        hands={ name="Vanya Cuffs", augments={'MND+10','Spell interruption rate down +15%','"Conserve MP"+6',}},
+        hands="Kaykaus cuffs +1",
         legs={ name="Vanya Slops", augments={'MND+10','Spell interruption rate down +15%','"Conserve MP"+6',}},
         feet={ name="Vanya Clogs", augments={'MP+50','"Cure" potency +7%','Enmity-6',}},
         neck="Henic Torque",
@@ -1031,7 +1050,7 @@ function get_sets()
         ammo="Pemphredo Tathlum",
         head={ name="Vanya Hood", augments={'MP+50','"Cure" potency +7%','Enmity-6',}},
         body={ name="Kaykaus Bliaut", augments={'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
-        hands={ name="Vanya Cuffs", augments={'MND+10','Spell interruption rate down +15%','"Conserve MP"+6',}},
+        hands="Kaykaus cuffs +1",
         legs={ name="Vanya Slops", augments={'MND+10','Spell interruption rate down +15%','"Conserve MP"+6',}},
         feet={ name="Vanya Clogs", augments={'MP+50','"Cure" potency +7%','Enmity-6',}},
         neck="Nodens Gorget",
