@@ -22,7 +22,11 @@ time_start = 0
 -- NEW
 tickdelay = os.clock() + 5
 dualwield = M('AUTO', '31', '11')
+bow = M('OFF', 'ON')
+ammoLock = M('OFF', 'ON')
+rangeLock = M('OFF', 'ON')
 currentHaste = 30
+
 
 --------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------
@@ -62,7 +66,7 @@ function buff_refresh(name,buff_details)
     -- Update JA and statagems when a buff refreshes.
     update_active_ja()
     validateTextInformation()
-    --NEW
+    -- NEW
     updateDualWield()
 end
 
@@ -70,27 +74,70 @@ function buff_change(name,gain,buff_details)
     -- Update JA and statagems when a buff is gained or lost.
     update_active_ja()
     validateTextInformation()
-    --NEW
+    -- NEW
     updateDualWield()
 
 end
 
-function RDM_lockMainHand( value )   
+function RDM_lockMainHand( value )
     -- We want to force lock weapons
-	if value == 'ON' then
-		-- We force lock only main and sub if in zeroTP mode (since we care abot lock, but not TP so Ullr and Ammo still swapping)
-		if meleeModes.current == 'zeroTP' then
-			disable('main','sub')
-		-- If not in zeroTP mode, lock everything
-		else
-			disable('main','sub','ranged')
-		end
-	-- If we are in auto or off mode, but not in zeroTP, we unlock everything
-    elseif value == 'OFF' or 'AUTO' then
-		enable('main','sub','ranged')
-	end
-	validateTextInformation()
-end
+    if value == 'ON' then
+      -- We force lock only main and sub if in zeroTP mode (since we care abot lock, but not TP so Ullr and Ammo still swapping)
+      if meleeModes.current == 'zeroTP' then
+              disable('main','sub')
+              add_to_chat(322, 'disabled main sub')
+              ammoLock:set('OFF')
+              rangeLock:set('OFF')
+              -- If not in zeroTP mode, lock everything
+          elseif bow.value == 'ON' then
+              disable('main','sub','ammo')
+              add_to_chat(322, 'disabled main sub ammo')
+              ammoLock:set('ON')
+              rangeLock:set('OFF')
+          elseif bow.value == 'OFF' then
+              disable('main','sub','ranged')
+              enable ('ammo')
+              add_to_chat(322, 'disabled main sub ranged')
+              add_to_chat(322, 'enabled ammo')
+              ammoLock:set('OFF')
+              rangeLock:set('ON')
+      end
+    -- If we are in auto or off mode, but not in zeroTP, we unlock everything
+      elseif value == 'OFF' or 'AUTO' then
+          if bow.value == 'ON' then
+              enable('main','sub')
+              disable('ammo')
+              add_to_chat(322, 'enabled main sub')
+              add_to_chat(322, 'disabled ammo')
+              ammoLock:set('ON')
+              rangeLock:set('OFF')
+          else
+              enable('main','sub','ranged','ammo')
+              add_to_chat(322, 'enabled main sub ranged ammo')
+              ammoLock:set('OFF')
+              rangeLock:set('OFF')
+          end
+    end
+    validateTextInformation()
+  end
+
+
+-- function RDM_lockMainHand( value )   
+--     -- We want to force lock weapons
+-- 	if value == 'ON' then
+-- 		-- We force lock only main and sub if in zeroTP mode (since we care abot lock, but not TP so Ullr and Ammo still swapping)
+-- 		if meleeModes.current == 'zeroTP' then
+-- 			disable('main','sub')
+-- 		-- If not in zeroTP mode, lock everything
+-- 		else
+-- 			disable('main','sub','ranged')
+-- 		end
+-- 	-- If we are in auto or off mode, but not in zeroTP, we unlock everything
+--     elseif value == 'OFF' or 'AUTO' then
+-- 		enable('main','sub','ranged')
+-- 	end
+-- 	validateTextInformation()
+-- end
 
 function precast(spell)
     -- Get the spell mapping, since we'll be passing it to various functions and checks.
@@ -124,6 +171,7 @@ function precast(spell)
         end
         RDM_lockMainHand(lock.value)
     end
+    
 
     -- Auto downgrade Phalanx II to Pahalanx I when casting on self, saves macro space so you can set your phalanx macro to cast phalanx2 on <stpt>
     if spell.target.type == 'SELF' and spell.name == "Phalanx II" then
@@ -190,7 +238,7 @@ function midcast(spell)
             equip(sets.midcast.cure.normal)
         end
     elseif spell.name:match('Utsusemi') then       
-        equip(sets.midcast.utsu)
+        -- equip(sets.midcast.utsu)
 
     -- Enhancing
     elseif spell.skill == 'Enhancing Magic' then
@@ -222,7 +270,13 @@ function midcast(spell)
 
     -- Enfeebling
     elseif spell.skill == 'Enfeebling Magic' then
-        equip(sets.midcast.Enfeebling[enfeebMap])
+
+        if enfeebMap == 'macc' and rangeLock.value == 'OFF' then
+            equip(sets.midcast.Enfeebling[enfeebMap].bow)
+        else
+            equip(sets.midcast.Enfeebling[enfeebMap])
+        end
+
         if Buff['Saboteur'] then
             equip({hands=EMPY.Hands})
         end 
@@ -299,6 +353,7 @@ function aftercast(spell)
         end
         RDM_lockMainHand(lock.value)
     end
+
     update_active_ja()
     updateDualWield()
     idle()
@@ -362,6 +417,10 @@ function idle()
         end       
     end
     equip({main = mainWeapon.current, sub = subWeapon.current})
+
+    if bow.value == 'ON' then
+        equip({ranged = "Kaja Bow"})
+    end
 end
  
 function status_change(new,old)
@@ -406,6 +465,18 @@ function self_command(command)
             elseif commandArgs[2] == 'dualwield' then
                 dualwield:cycle()
                 idle()
+
+            elseif commandArgs[2] == 'bow' then
+                bow:cycle()
+                RDM_lockMainHand(meleeing.value)
+                idle()
+
+                -- NEW
+                if bow.value == 'ON' then
+                    enable('ranged','ammo')
+                    equip({ranged="Kaja Bow"})
+                    disable('ranged','ammo')
+                end
 
             elseif commandArgs[2] == 'mainweapon' then
                 mainWeapon:cycle()
