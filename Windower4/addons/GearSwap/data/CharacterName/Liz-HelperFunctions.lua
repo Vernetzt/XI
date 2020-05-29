@@ -178,7 +178,7 @@ end
 
 if player and player.index and windower.ffxi.get_mob_by_index(player.index) then
 
-    windower.register_event('action', function(act)
+    windower.raw_register_event('action', function(act)
         for _, target in pairs(act.targets) do
             local battle_target = windower.ffxi.get_mob_by_target("t")
             if battle_target ~= nil and target.id == battle_target.id then
@@ -402,17 +402,20 @@ function EnspellCheck()
 	-- This only gets checked when wielding Crocea or Vitiation Sword.
 	-- Enspell matches double weather but bad day
 	if Buff['En-Weather'] and get_weather_intensity() == 2 and not Buff['En-BadDay'] then
-		equip(sets.midcast.Orpheus)	
+        equip(sets.midcast.Orpheus)
+        equip(sets.midcast.AyanmoHands)
 	-- Enspell matches double weather and irrelevent day
 	elseif Buff['En-Weather'] and get_weather_intensity() == 2 then
         equip(sets.midcast.Obi)
+        equip(sets.midcast.AyanmoHands)
     -- Enspell matches day AND weather
     elseif Buff['En-Weather'] and Buff['En-Day'] then
         equip(sets.midcast.Obi)
+        equip(sets.midcast.AyanmoHands)
     -- Enspell is there but doesnt match anything of note (single weather no day, day but no weather etc.)
     elseif Buff['Enspell'] then
         equip(sets.midcast.Orpheus)
-        -- equip(sets.midcast.AyanmoHands)
+        equip(sets.midcast.AyanmoHands)
     end 
 end
 

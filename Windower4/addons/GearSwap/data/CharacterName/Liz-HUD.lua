@@ -7,9 +7,9 @@ keybinds_off['key_bind_casting'] = ''
 keybinds_off['key_bind_mainweapon'] = ''
 keybinds_off['key_bind_subweapon'] = ''
 
--- NEW
 keybinds_off['key_bind_dualwield'] = ''
 keybinds_off['key_bind_bow'] = ''
+keybinds_off['key_bind_thMode'] = ''
 
 keybinds_off['key_bind_element_cycle'] = ''
 keybinds_off['key_bind_sc_level'] = ''
@@ -77,9 +77,9 @@ hud_nukingElement = ''
 hud_makingSC = ''
 hud_regenMode = ''
 
--- NEW
 hud_dualwield = ''
 hud_bow = ''
+hud_thMode = ''
 
 hud_Enspell = ''
 hud_handleSkillchains = ''
@@ -95,72 +95,77 @@ hud_magicBurst = ''
 function construct_HUD_Categories( useLightMode )
 	if useLightMode then
 		hud_endofline = ''
-		hud_idleMode = [[        ${keybinds_color}${key_bind_idle}${options_color}Idle Set:\cr ${selection_color}${player_current_idle|Unset}]]
+		hud_idleMode = [[    ${keybinds_color}${key_bind_idle}${options_color}Idle:\cr ${selection_color}${player_current_idle|Unset}]]
 		if meleeModes ~= nil then
-			hud_meleeMode = [[        ${keybinds_color}${key_bind_melee}${options_color}Melee Set:\cr ${selection_color}${player_current_melee|Unset}]]
+			hud_meleeMode = [[    ${keybinds_color}${key_bind_melee}${options_color}Melee:\cr ${selection_color}${player_current_melee|Unset}]]
 		else
 			hud_meleeMode = ''
 		end
 
-		-- NEW
 		if dualwield ~= nil then
-			hud_dualwield = [[        ${keybinds_color}${key_bind_dualwield}${options_color}Dual Wield:\cr ${selection_color}${player_current_dualwield|Unset}]]
+			hud_dualwield = [[    ${keybinds_color}${key_bind_dualwield}${options_color}DW:\cr ${selection_color}${player_current_dualwield|Unset}]]
 		else
 			hud_dualwield = ''
 		end
 
 		if bow ~= nil then
-			hud_bow = [[        ${keybinds_color}${key_bind_bow}${options_color}Bow:\cr ${selection_color}${player_current_bow|Unset}]]
+			hud_bow = [[    ${keybinds_color}${key_bind_bow}${options_color}Bow:\cr ${selection_color}${player_current_bow|Unset}]]
 		else
 			hud_bow = ''
 		end
 		
+		if thMode ~= nil then
+			hud_thMode = [[    ${keybinds_color}${key_bind_thMode}${options_color}TH:\cr ${selection_color}${player_current_thMode|Unset}]]
+		else
+			hud_thMode = ''
+		end
+
 		if nukeModes ~= nil then
-			hud_nukingMode = [[        ${keybinds_color}${key_bind_casting}${options_color}Nuking:\cr ${selection_color}${player_current_casting|Unset}]]
+			hud_nukingMode = [[    ${keybinds_color}${key_bind_casting}${options_color}Nuke:\cr ${selection_color}${player_current_casting|Unset}]]
 		else
 			hud_nukingMode = ''
 		end
 		if mainWeapon ~= nil then
-			hud_mainWeapon = [[        ${keybinds_color}${key_bind_mainweapon}${options_color}Main Weapon:\cr ${selection_color}${player_current_mainweapon|Unset}]]
+			hud_mainWeapon = [[    ${keybinds_color}${key_bind_mainweapon}${options_color}Main:\cr ${selection_color}${player_current_mainweapon|Unset}]]
 		else
 			hud_mainWeapon = ''
 		end
 		if subWeapon ~= nil then
-			hud_subWeapon = [[        ${keybinds_color}${key_bind_subweapon}${options_color}Sub Weapon:\cr ${selection_color}${player_current_subweapon|Unset}]]
+			hud_subWeapon = [[    ${keybinds_color}${key_bind_subweapon}${options_color}Sub:\cr ${selection_color}${player_current_subweapon|Unset}]]
 		else
 			hud_subWeapon = ''
 		end
 		if player.main_job == "BLM" or player.main_job == "SCH" or player.main_job == "RDM" or player.main_job == "NIN" or player.main_job == "WHM" or player.main_job == "SMN" or player.main_job == "GEO" then
-			hud_nukingElement = [[        ${keybinds_color}${key_bind_element_cycle}${options_color}Nuking:\cr ${element_color}${toggle_element_cycle|Unset}]]
+			hud_nukingElement = [[    ${keybinds_color}${key_bind_element_cycle}${options_color}Nuke:\cr ${element_color}${toggle_element_cycle|Unset}]]
 		else
 			hud_nukingElement = ''
 		end
 		if player.main_job == 'SCH' then
-			hud_makingSC = [[        ${keybinds_color}${key_bind_sc_level}${options_color}Skillchain:\cr ${sc_element_color}${toggle_sc_level|Unset}]]		
+			hud_makingSC = [[    ${keybinds_color}${key_bind_sc_level}${options_color}SC:\cr ${sc_element_color}${toggle_sc_level|Unset}]]		
 		else
 			hud_makingSC = ''
 		end
 		if player.main_job == 'SCH' then
-			hud_regenMode = [[        ${keybinds_color}${key_bind_regen}${options_color}Regen:\cr ${selection_color}${player_current_regen|Unset}]]		
+			hud_regenMode = [[    ${keybinds_color}${key_bind_regen}${options_color}Regen:\cr ${selection_color}${player_current_regen|Unset}]]		
 		else
 			hud_regenMode = ''
 		end
 		if player.main_job == 'RDM' then
-			hud_Enspell = [[        ${keybinds_color}${key_bind_enspell_cycle}${options_color}Enspell:\cr ${enspell_color}${toggle_enspell_cycle|Unset}]]
+			hud_Enspell = [[    ${keybinds_color}${key_bind_enspell_cycle}${options_color}Enspell:\cr ${enspell_color}${toggle_enspell_cycle|Unset}]]
 		else
 			hud_Enspell = ''
 		end
-		hud_handleSkillchains = [[        ${keybinds_color}${key_bind_matchsc}${options_color}Handle Skillchains:\cr ${player_match_sc}]]
-		hud_lockWeapons = [[        ${keybinds_color}${key_bind_lock_weapon}${options_color}Lock Weapon:\cr ${toggle_lock_weapon}]]
-		hud_lockMovespeed = [[        ${keybinds_color}${key_bind_movespeed_lock}${options_color}Movement Speed:\cr ${toggle_movespeed_lock}]]
-		hud_lastSC = [[        ${options_color}Last SC:${last_sc_element_color}${last_sc|No SC yet}]]
-		hud_burstWindow = [[        ${options_color}Burst Window:${last_sc_element_color}${burst_window|0}]]
-		hud_magicBurst = [[        ${options_color}Magic Burst:${player_current_mb}]]
+		hud_handleSkillchains = [[    ${keybinds_color}${key_bind_matchsc}${options_color}Handle SC:\cr ${player_match_sc}]]
+		hud_lockWeapons = [[    ${keybinds_color}${key_bind_lock_weapon}${options_color}Lock:\cr ${toggle_lock_weapon}]]
+		hud_lockMovespeed = [[    ${keybinds_color}${key_bind_movespeed_lock}${options_color}Speed:\cr ${toggle_movespeed_lock}]]
+		hud_lastSC = [[    ${options_color}Last SC:${last_sc_element_color}${last_sc|No SC yet}]]
+		hud_burstWindow = [[    ${options_color}MB Window:${last_sc_element_color}${burst_window|0}]]
+		hud_magicBurst = [[    ${options_color}MB:${player_current_mb}]]
 		if player.main_job == 'GEO' then
-			hud_geoCycle = [[        ${keybinds_color}${key_bind_geo_cycle}${options_color}Geo-Spell:\cr ${selection_color}${toggle_geo_cycle|Unset}]]
-			hud_indiCycle = [[        ${keybinds_color}${key_bind_indi_cycle}${options_color}Indi-Spell:\cr ${selection_color}${toggle_indi_cycle|Unset}]]
-			hud_entrustCycle = [[        ${keybinds_color}${key_bind_entrust_cycle}${options_color}Entrust-Spell:\cr ${selection_color}${toggle_entrust_cycle|Unset}]]
-			hud_cardinalChant = [[        ${options_color}Cardinal Chant:\cr ${card_chant_color}${card_chant|No Target}]]
+			hud_geoCycle = [[    ${keybinds_color}${key_bind_geo_cycle}${options_color}Geo-Spell:\cr ${selection_color}${toggle_geo_cycle|Unset}]]
+			hud_indiCycle = [[    ${keybinds_color}${key_bind_indi_cycle}${options_color}Indi-Spell:\cr ${selection_color}${toggle_indi_cycle|Unset}]]
+			hud_entrustCycle = [[    ${keybinds_color}${key_bind_entrust_cycle}${options_color}Entrust-Spell:\cr ${selection_color}${toggle_entrust_cycle|Unset}]]
+			hud_cardinalChant = [[    ${options_color}Cardinal Chant:\cr ${card_chant_color}${card_chant|No Target}]]
 		else
 			hud_geoCycle = ''
 			hud_indiCycle = ''
@@ -171,89 +176,94 @@ function construct_HUD_Categories( useLightMode )
 		hud_endofline = [[\cr
 		]]
 		hud_idleMode = [[\cr 
-		        ${keybinds_color}${key_bind_idle}${options_color}Idle Set:\cr ${selection_color}${player_current_idle|Unset}]]
+		${keybinds_color}${key_bind_idle}${options_color}Idle:\cr ${selection_color}${player_current_idle|Unset}]]
 		if meleeModes ~= nil then
 			hud_meleeMode = [[\cr 
-			        ${keybinds_color}${key_bind_melee}${options_color}Melee Set:\cr ${selection_color}${player_current_melee|Unset}]]
+			${keybinds_color}${key_bind_melee}${options_color}Melee:\cr ${selection_color}${player_current_melee|Unset}]]
 		else
 			hud_meleeMode = ''
 		end
 
-		-- NEW
 		if dualwield ~= nil then
 			hud_dualwield = [[\cr 
-			        ${keybinds_color}${key_bind_dualwield}${options_color}Dual Wield:\cr ${selection_color}${player_current_dualwield|Unset}]]
+			${keybinds_color}${key_bind_dualwield}${options_color}DW:\cr ${selection_color}${player_current_dualwield|Unset}]]
 		else
 			hud_dualwield = ''
 		end
 
 		if bow ~= nil then
 			hud_bow = [[\cr 
-			        ${keybinds_color}${key_bind_bow}${options_color}Bow:\cr ${selection_color}${player_current_bow|Unset}]]
+			${keybinds_color}${key_bind_bow}${options_color}Bow:\cr ${selection_color}${player_current_bow|Unset}]]
 		else
 			hud_bow = ''
 		end
-
+		
+		if thMode ~= nil then
+			hud_thMode = [[\cr 
+			${keybinds_color}${key_bind_thMode}${options_color}TH:\cr ${selection_color}${player_current_thMode|Unset}]]
+		else
+			hud_thMode = ''
+		end
 
 		hud_nukingMode = [[\cr 
-		        ${keybinds_color}${key_bind_casting}${options_color}Nuking:\cr ${selection_color}${player_current_casting|Unset}]]
+		${keybinds_color}${key_bind_casting}${options_color}Nuking:\cr ${selection_color}${player_current_casting|Unset}]]
 		if mainWeapon ~= nil then
 			hud_mainWeapon = [[\cr 
-			        ${keybinds_color}${key_bind_mainweapon}${options_color}Main Weapon:\cr ${selection_color}${player_current_mainweapon|Unset}]]
+			${keybinds_color}${key_bind_mainweapon}${options_color}Main:\cr ${selection_color}${player_current_mainweapon|Unset}]]
 		else
 			hud_mainWeapon = ''
 		end
 		if subWeapon ~= nil then
 			hud_subWeapon = [[\cr 
-			        ${keybinds_color}${key_bind_subweapon}${options_color}Sub Weapon:\cr ${selection_color}${player_current_subweapon|Unset}]]
+			${keybinds_color}${key_bind_subweapon}${options_color}Sub:\cr ${selection_color}${player_current_subweapon|Unset}]]
 		else
 			hud_mainWeapon = ''
 		end
 		if player.main_job == "BLM" or player.main_job == "SCH" or player.main_job == "RDM" or player.main_job == "NIN" or player.main_job == "WHM" or player.main_job == "SMN" or player.main_job == "GEO" then
 			hud_nukingElement = [[\cr 
-			        ${keybinds_color}${key_bind_element_cycle}${options_color}Nuking:\cr ${element_color}${toggle_element_cycle|Unset}]]
+			${keybinds_color}${key_bind_element_cycle}${options_color}Nuking:\cr ${element_color}${toggle_element_cycle|Unset}]]
 		else
 			hud_nukingElement = ''
 		end
 		if player.main_job == 'SCH' then
 			hud_makingSC = [[\cr 
-			        ${keybinds_color}${key_bind_sc_level}${options_color}Skillchain:\cr ${sc_element_color}${toggle_sc_level|Unset}]]		
+			${keybinds_color}${key_bind_sc_level}${options_color}SC:\cr ${sc_element_color}${toggle_sc_level|Unset}]]		
 		else
 			hud_makingSC = ''
 		end
 		if player.main_job == 'SCH' then
 			hud_regenMode = [[\cr 
-			        ${keybinds_color}${key_bind_regen}${options_color}Regen:\cr ${selection_color}${player_current_regen|Unset}]]		
+			${keybinds_color}${key_bind_regen}${options_color}Regen:\cr ${selection_color}${player_current_regen|Unset}]]		
 		else
 			hud_regenMode = ''
 		end
 		if player.main_job == 'RDM' then
 			hud_Enspell = [[\cr 
-			        ${keybinds_color}${key_bind_enspell_cycle}${options_color}Enspell:\cr ${enspell_color}${toggle_enspell_cycle|Unset}]]
+			${keybinds_color}${key_bind_enspell_cycle}${options_color}Enspell:\cr ${enspell_color}${toggle_enspell_cycle|Unset}]]
 		else
 			hud_Enspell = ''
 		end
 		hud_handleSkillchains = [[\cr
-		        ${keybinds_color}${key_bind_matchsc}${options_color}Handle Skillchains:\cr ${player_match_sc}]]
+		${keybinds_color}${key_bind_matchsc}${options_color}Handle SC:\cr ${player_match_sc}]]
 		hud_lockWeapons = [[\cr
-		        ${keybinds_color}${key_bind_lock_weapon}${options_color}Lock Weapon:\cr ${toggle_lock_weapon}]]
+		${keybinds_color}${key_bind_lock_weapon}${options_color}Lock:\cr ${toggle_lock_weapon}]]
 		hud_lockMovespeed = [[\cr
-		        ${keybinds_color}${key_bind_movespeed_lock}${options_color}Movement Speed:\cr ${toggle_movespeed_lock}]]
+		${keybinds_color}${key_bind_movespeed_lock}${options_color}Speed:\cr ${toggle_movespeed_lock}]]
 		hud_lastSC = [[\cr
-		        ${options_color}Last SC:${last_sc_element_color}${last_sc|No SC yet}]]
+		${options_color}Last SC:${last_sc_element_color}${last_sc|No SC yet}]]
 		hud_burstWindow = [[\cr
-		        ${options_color}Burst Window:${last_sc_element_color}${burst_window|0}]]
+		${options_color}Burst Window:${last_sc_element_color}${burst_window|0}]]
 		hud_magicBurst = [[\cr
-		        ${options_color}Magic Burst:${player_current_mb}]]
+		${options_color}MB:${player_current_mb}]]
 		if player.main_job == 'GEO' then
 			hud_geoCycle = [[\cr
-		        ${keybinds_color}${key_bind_geo_cycle}${options_color}Geo-Spell:\cr ${selection_color}${toggle_geo_cycle|Unset}]]
+		  ${keybinds_color}${key_bind_geo_cycle}${options_color}Geo-Spell:\cr ${selection_color}${toggle_geo_cycle|Unset}]]
 			hud_indiCycle = [[\cr
-		        ${keybinds_color}${key_bind_indi_cycle}${options_color}Indi-Spell:\cr ${selection_color}${toggle_indi_cycle|Unset}]]
+		  ${keybinds_color}${key_bind_indi_cycle}${options_color}Indi-Spell:\cr ${selection_color}${toggle_indi_cycle|Unset}]]
 			hud_entrustCycle = [[\cr
-		        ${keybinds_color}${key_bind_entrust_cycle}${options_color}Entrust-Spell:\cr ${selection_color}${toggle_entrust_cycle|Unset}]]
+		  ${keybinds_color}${key_bind_entrust_cycle}${options_color}Entrust-Spell:\cr ${selection_color}${toggle_entrust_cycle|Unset}]]
 			hud_cardinalChant = [[\cr
-		        ${options_color}Cardinal Chant:\cr ${card_chant_color}${card_chant|No Target}]]
+		  ${options_color}Cardinal Chant:\cr ${card_chant_color}${card_chant|No Target}]]
 		else
 			hud_geoCycle = ''
 			hud_indiCycle = ''
@@ -265,13 +275,26 @@ end
 
 function buildHUD( useLightMode )
 	if useLightMode then
-		hud_mode = [[        ${sections_color}Modes:]]..hud_idleMode..hud_meleeMode..hud_dualwield..hud_nukingMode..hud_endofline
+		hud_mode = hud_idleMode..hud_meleeMode..hud_dualwield..hud_nukingMode..hud_endofline
+		hud_options = hud_handleSkillchains..hud_lockWeapons..hud_dualwield..hud_thMode..hud_lockMovespeed..hud_endofline
+		hud_job = hud_geoCycle..hud_indiCycle..hud_entrustCycle..hud_mainWeapon..hud_subWeapon..hud_bow..hud_regenMode..hud_nukingElement..hud_makingSC..hud_Enspell..hud_endofline        
+		hud_battle = hud_lastSC..hud_burstWindow..hud_magicBurst..hud_cardinalChant..hud_endofline
 	else
 		hud_mode = [[${sections_color}Modes:]]..hud_idleMode..hud_meleeMode..hud_nukingMode..hud_endofline
+		hud_options = [[${sections_color}Options:]]..hud_handleSkillchains..hud_lockWeapons..hud_dualwield..hud_thMode..hud_lockMovespeed..hud_endofline
+		hud_job = [[${sections_color}${player_job}:]]..hud_geoCycle..hud_indiCycle..hud_entrustCycle..hud_mainWeapon..hud_subWeapon..hud_bow..hud_regenMode..hud_nukingElement..hud_makingSC..hud_Enspell..hud_endofline        
+		hud_battle = [[${sections_color}Battle Info:]]..hud_lastSC..hud_burstWindow..hud_magicBurst..hud_cardinalChant..hud_endofline 
 	end
-	hud_options = [[${sections_color}Options:]]..hud_handleSkillchains..hud_lockWeapons..hud_dualwield..hud_lockMovespeed..hud_endofline
-	hud_job = [[${sections_color}${player_job}:]]..hud_geoCycle..hud_indiCycle..hud_entrustCycle..hud_mainWeapon..hud_subWeapon..hud_bow..hud_regenMode..hud_nukingElement..hud_makingSC..hud_Enspell..hud_endofline        
-	hud_battle = [[${sections_color}Battle Info:]]..hud_lastSC..hud_burstWindow..hud_magicBurst..hud_cardinalChant..hud_endofline 
+
+	-- if useLightMode then
+	-- 	hud_mode = [[        ${sections_color}Modes:]]..hud_idleMode..hud_meleeMode..hud_dualwield..hud_nukingMode..hud_endofline
+	-- else
+	-- 	hud_mode = [[${sections_color}Modes:]]..hud_idleMode..hud_meleeMode..hud_nukingMode..hud_endofline
+	-- end
+	-- hud_options = [[${sections_color}Options:]]..hud_handleSkillchains..hud_lockWeapons..hud_dualwield..hud_thMode..hud_lockMovespeed..hud_endofline
+	-- hud_job = [[${sections_color}${player_job}:]]..hud_geoCycle..hud_indiCycle..hud_entrustCycle..hud_mainWeapon..hud_subWeapon..hud_bow..hud_regenMode..hud_nukingElement..hud_makingSC..hud_Enspell..hud_endofline        
+	-- hud_battle = [[${sections_color}Battle Info:]]..hud_lastSC..hud_burstWindow..hud_magicBurst..hud_cardinalChant..hud_endofline 
+
 end
 --------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------
@@ -311,13 +334,16 @@ function validateTextInformation()
     	main_text_hud.player_current_melee = meleeModes.current
 		end
 
-		-- NEW
 		if dualwield ~= nil then
     	main_text_hud.player_current_dualwield = dualwield.current
 		end
 		if bow ~= nil then
 			main_text_hud.player_current_bow = bow.current
 		end
+		if thMode ~= nil then
+			main_text_hud.player_current_thMode = thMode.current
+		end
+
 
     if mainWeapon ~= nil then
     	main_text_hud.player_current_mainweapon = mainWeapon.current
@@ -504,8 +530,10 @@ end
 function toggleHudStyle( useLightMode )
     texts.clear(main_text_hud)
     if useLightMode then
-        hud_x_pos = 0     
-        hud_y_pos = 0
+        -- hud_x_pos = 200
+				-- hud_y_pos = 980
+				hud_x_pos = 300
+        hud_y_pos = -1
         hud_font_size = 10
         hud_padding = 1
         hud_transparency = 0
